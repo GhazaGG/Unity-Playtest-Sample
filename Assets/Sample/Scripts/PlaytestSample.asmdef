@@ -1,0 +1,10 @@
+{
+    "name": "PlaytestSample",
+    "rootNamespace": "PlaytestSample",
+    "references": [
+        "Unity.Collections",
+        "Unity.Netcode.Runtime",
+        "Unity.Networking.Transport"
+    ],
+    "autoReferenced": true
+}
