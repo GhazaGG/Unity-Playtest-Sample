@@ -12,6 +12,7 @@ namespace PlaytestSample
         [SerializeField] private string _levelScene = "Level01";
         [SerializeField] private string _menuScene = "Menu";
         [SerializeField] private int _maxPlayers = 4;
+        [SerializeField] private ushort _port = 7777;
 
         private static bool s_commandLineUsed;
 
@@ -24,6 +25,9 @@ namespace PlaytestSample
             _network = GetComponent<NetworkManager>();
             _network.ConnectionApprovalCallback = Approve;
             _network.OnClientStopped += OnStopped;
+            var args = System.Environment.GetCommandLineArgs();
+            var port = System.Array.IndexOf(args, "-port");
+            if (port >= 0 && port + 1 < args.Length && ushort.TryParse(args[port + 1], out var value)) _port = value;
         }
 
         private void Start()
@@ -39,12 +43,13 @@ namespace PlaytestSample
 
         public void Host()
         {
+            GetComponent<UnityTransport>().ConnectionData.Port = _port;
             if (_network.StartHost()) _network.SceneManager.LoadScene(_levelScene, LoadSceneMode.Single);
         }
 
         public void Join(string address)
         {
-            GetComponent<UnityTransport>().SetConnectionData(address, 7777);
+            GetComponent<UnityTransport>().SetConnectionData(address, _port);
             _network.StartClient();
         }
 

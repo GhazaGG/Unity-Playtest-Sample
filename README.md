@@ -26,6 +26,7 @@ Builds accept a few command-line switches for quick local tests:
 |---|---|
 | `-host` | Start hosting right away |
 | `-join <address>` | Join that address right away |
+| `-port <port>` | Host or join on this UDP port instead of 7777 (to run two sessions on one PC) |
 | `-latency <ms>` | Delay every packet this peer sends (`LatencySimulator`). Measured with NGO's `GetCurrentRtt` on one PC: 0 → ~10 ms, 30 on both peers → ~140 ms, 60 on both → ~275 ms round trip |
 
 ## Layout

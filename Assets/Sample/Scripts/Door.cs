@@ -11,11 +11,7 @@ namespace PlaytestSample
 
         public readonly NetworkVariable<bool> IsOpen = new();
 
-        public override void OnNetworkSpawn()
-        {
-            IsOpen.OnValueChanged += OnOpenChanged;
-            Swing();
-        }
+        public override void OnNetworkSpawn() => IsOpen.OnValueChanged += OnOpenChanged;
 
         public override void OnNetworkDespawn() => IsOpen.OnValueChanged -= OnOpenChanged;
 
