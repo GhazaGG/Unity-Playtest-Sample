@@ -36,7 +36,7 @@
     "com.unity.modules.xr": "1.0.0",
     "com.unity.multiplayer.center": "1.0.1",
     "com.unity.netcode.gameobjects": "2.13.3",
-    "com.unity.pipeline": "0.8.0-exp.1",
+    "com.unity.pipeline": "0.9.1-exp.1",
     "com.unity.transport": "2.7.4"
   }
 }
