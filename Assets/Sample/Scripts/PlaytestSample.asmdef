@@ -4,7 +4,8 @@
     "references": [
         "Unity.Collections",
         "Unity.Netcode.Runtime",
-        "Unity.Networking.Transport"
+        "Unity.Networking.Transport",
+        "Unity.InputSystem"
     ],
     "autoReferenced": true
 }

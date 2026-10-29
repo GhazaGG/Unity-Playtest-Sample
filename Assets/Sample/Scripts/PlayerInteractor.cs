@@ -13,7 +13,7 @@ namespace PlaytestSample
 
         private void Update()
         {
-            if (IsOwner && Input.GetKeyDown(KeyCode.E)) Interact();
+            if (IsOwner && GameInput.Interact.WasPressedThisFrame()) Interact();
         }
 
         public string Interact()

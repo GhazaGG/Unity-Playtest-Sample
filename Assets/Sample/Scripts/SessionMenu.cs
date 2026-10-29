@@ -19,6 +19,7 @@ namespace PlaytestSample
         private NetworkManager _network;
         private ScoreBoard _scoreBoard;
         private string _address = "127.0.0.1";
+        private bool _menuOpen;
 
         private void Awake()
         {
@@ -55,6 +56,20 @@ namespace PlaytestSample
 
         public void Leave() => _network.Shutdown();
 
+        // Esc opens the in-game menu and back. While it is open the player's own input is off.
+        private void Update()
+        {
+            if (!_network.IsListening || !GameInput.ToggleMenu.WasPressedThisFrame()) return;
+            _menuOpen = !_menuOpen;
+            if (_menuOpen) GameInput.Player.Disable();
+        }
+
+        public void Resume()
+        {
+            _menuOpen = false;
+            GameInput.Player.Enable();
+        }
+
         public string Hud()
         {
             var player = _network.LocalClient?.PlayerObject;
@@ -76,6 +91,7 @@ namespace PlaytestSample
         private void OnStopped(bool wasHost)
         {
             // Start over from a fresh menu, which brings its own NetworkManager.
+            Resume();
             Destroy(gameObject);
             SceneManager.LoadScene(_menuScene);
         }
@@ -89,11 +105,16 @@ namespace PlaytestSample
                 _address = GUILayout.TextField(_address);
                 if (GUILayout.Button("Join")) Join(_address);
             }
+            else if (_menuOpen)
+            {
+                GUILayout.Label("Menu");
+                if (GUILayout.Button("Resume")) Resume();
+                if (GUILayout.Button("Leave")) Leave();
+            }
             else
             {
                 GUILayout.Label(Hud());
-                GUILayout.Label("WASD move, hold right mouse to look, E interact");
-                if (GUILayout.Button("Leave")) Leave();
+                GUILayout.Label("WASD move, hold right mouse to look, E interact, Esc menu");
             }
             GUILayout.EndArea();
         }

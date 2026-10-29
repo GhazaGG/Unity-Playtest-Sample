@@ -10,14 +10,15 @@ It is deliberately small, and it is **not bug-free**. Try your own playtest on i
 
 - Unity 6000.3.25f1
 - Netcode for GameObjects 2.13.3, Unity Transport 2.7.4
-- `com.unity.pipeline` 0.8.0-exp.1 (the CLI the skill uses; the game does not need it)
+- Input System 1.20.1 (E and Esc; movement and look still use the old Input Manager, so Active Input Handling is Both)
+- `com.unity.pipeline` 0.9.1-exp.1 (the CLI the skill uses; the game does not need it)
 
 ## Play
 
 Open `Assets/Sample/Scenes/Menu.unity` and press Play, then **Host**. A second player can **Join** `127.0.0.1` from a
 build.
 
-- WASD to move, hold the right mouse button to look, E to interact.
+- WASD to move, hold the right mouse button to look, E to interact, Esc for the menu (Resume, Leave).
 - Take the key from the table, unlock the door, and collect the coins in both rooms. Coins count for the whole team.
 
 Builds accept a few command-line switches for quick local tests:
@@ -36,7 +37,7 @@ Builds accept a few command-line switches for quick local tests:
 | `Assets/Sample/Scenes/Menu.unity` | NetworkManager with `SessionMenu` (host, join, leave, HUD) and `LatencySimulator` |
 | `Assets/Sample/Scenes/Level01.unity` | The level: rooms, door, key, coins, `ScoreBoard`, `SpawnPoints` |
 | `Assets/Sample/Prefabs/Player.prefab` | First-person player: `PlayerMotor`, `InteractionDetector`, `PlayerInteractor`, `PlayerState` |
-| `Assets/Sample/Scripts/` | All game code, assembly `PlaytestSample` |
+| `Assets/Sample/Scripts/` | All game code, assembly `PlaytestSample`; `GameInput` holds the Input System actions |
 
 ## License
 
